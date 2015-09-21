@@ -28,7 +28,7 @@ class XGBoostTester(BaseTester):
                                   'subsample': i_sub_sample,
                                   'eval_metric': 'auc',
                                   'silent': 1,
-                                  'nthread': 2}
+                                  'nthread': 4}
 
                         eval_list = [(dtrain, 'train'), (dtest, 'eval')]
                         bst = xgb.train(params, dtrain, self.NB_ROUNDS, eval_list, evals_result=evals_result, verbose_eval=False, early_stopping_rounds=10)
