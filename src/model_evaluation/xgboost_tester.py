@@ -31,7 +31,7 @@ class XGBoostTester(BaseTester):
                                   'nthread': 4}
 
                         eval_list = [(dtrain, 'train'), (dtest, 'eval')]
-                        bst = xgb.train(params, dtrain, self.NB_ROUNDS, eval_list, evals_result=evals_result, verbose_eval=False, early_stopping_rounds=50)
+                        bst = xgb.train(params, dtrain, self.NB_ROUNDS, eval_list, evals_result=evals_result, verbose_eval=False, early_stopping_rounds=200)
 
                         timestamp = datetime.now()
                         model_id = 'XGBoost_{:%Y%m%d_%H%M%S}'.format(timestamp)
