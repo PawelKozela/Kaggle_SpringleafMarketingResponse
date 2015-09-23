@@ -79,6 +79,8 @@ def identify_feature_object(feature_data):
     # Date - simple - take the top 5...
     is_date = True
     for i in range(0, min(len(values), 5)):
+        if values.index[i] == 'nan':
+            continue
         if parse_date(values.index[i]) is None:
             is_date = False
             break
