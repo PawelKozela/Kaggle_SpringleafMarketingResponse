@@ -68,6 +68,31 @@ def is_int_score(feature_data_values):
     return 'Int', 'Score', default_values, -1, None
 
 
+def is_float_score(feature_data_values):
+    if not 1 < feature_data_values.shape[0] < 110:
+        return None
+
+    score_threshold = 0.5
+    if feature_data_values.shape[0] > 5:
+        score_threshold = 0.75
+    # Check that the values mostly fit
+    if not feature_data_values.index[feature_data_values.index < feature_data_values.shape[0]].shape[0] / float(feature_data_values.shape[0]) > score_threshold:
+        return None
+
+    # Find the default values
+    default_values = []
+    default_values.extend(feature_data_values.index[feature_data_values.index < 0])
+
+    if feature_data_values.shape[0] < 70:
+        default_values.extend(feature_data_values.index[feature_data_values.index > 90])
+    else:
+        default_values.extend(feature_data_values.index[feature_data_values.index > 900])
+
+    return 'Float', 'Score', default_values, -1, None
+
+
+
+
 # ---------------------------------- 'Generic' # ----------------------------------
 
 def identify_feature_object(feature_data):
@@ -109,6 +134,12 @@ def identify_feature_object(feature_data):
 
 
 def identify_feature_float(feature_data):
+    values = feature_data.value_counts()
+
+    ret = is_float_score(values)
+    if ret is not None:
+        return ret
+
     return 'Float', 'Unknown', [], -1, 'Standard'
 
 

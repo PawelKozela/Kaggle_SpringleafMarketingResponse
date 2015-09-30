@@ -4,12 +4,14 @@ import pandas as pd
 
 class BaseFeatureTransformer:
 
-    def __init__(self, features_dir):
+    def __init__(self, features_dir, train_features_filename='train_features.hf5', test_features_filename='test_features.hf5'):
         self.features_dir = features_dir
+        self._train_features_filename = train_features_filename
+        self._test_features_filename = test_features_filename
 
         # Load features
-        self._train_features = pd.read_hdf(os.path.join(features_dir, 'train_features.hf5'), 'data')
-        self._test_features = pd.read_hdf(os.path.join(features_dir, 'test_features.hf5'), 'data')
+        self._train_features = pd.read_hdf(os.path.join(features_dir, train_features_filename), 'data')
+        self._test_features = pd.read_hdf(os.path.join(features_dir, test_features_filename), 'data')
 
     def transform_features(self):
         raise NotImplementedError
@@ -19,5 +21,5 @@ class BaseFeatureTransformer:
         if self.features_dir == target_dir:
             raise ValueError('Would override base features')
 
-        self._train_features.to_hdf(os.path.join(target_dir, 'train_features.hf5'), 'data', complib='blosc', complevel=9)
-        self._test_features.to_hdf(os.path.join(target_dir, 'test_features.hf5'), 'data', complib='blosc', complevel=9)
+        self._train_features.to_hdf(os.path.join(target_dir, self._train_features_filename), 'data', complib='blosc', complevel=9)
+        self._test_features.to_hdf(os.path.join(target_dir, self._test_features_filename), 'data', complib='blosc', complevel=9)

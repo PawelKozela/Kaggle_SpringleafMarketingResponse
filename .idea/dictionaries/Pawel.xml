@@ -1,6 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Pawel">
     <words>
+      <w>dtest</w>
+      <w>dtrain</w>
+      <w>eval</w>
+      <w>evals</w>
+      <w>scaler</w>
       <w>springleaf</w>
     </words>
   </dictionary>
