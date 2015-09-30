@@ -1,12 +1,13 @@
-from feature_set_validator import FeatureSetValidator
-
 from datetime import datetime
 import os
+
 import pandas as pd
 import xgboost as xgb
 
+from base_feature_set_validator import BaseFeatureSetValidator
 
-class FastFeatureSetValidator(FeatureSetValidator):
+
+class FastFeatureSetValidator(BaseFeatureSetValidator):
     """
     Evaluates the feature sets with a short XGBoost: 100 rounds, 3 seeds
     Takes ~ 3 minutes

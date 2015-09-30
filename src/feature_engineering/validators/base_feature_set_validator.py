@@ -2,7 +2,7 @@ import os
 import pickle
 
 
-class FeatureSetValidator:
+class BaseFeatureSetValidator:
     """
     The intent of this class is to compare different pre-processing strategies
     Each subclass always evaluate with the same model and stores the results
