@@ -5,6 +5,7 @@
       <w>dtrain</w>
       <w>eval</w>
       <w>evals</w>
+      <w>regressor</w>
       <w>scaler</w>
       <w>springleaf</w>
     </words>

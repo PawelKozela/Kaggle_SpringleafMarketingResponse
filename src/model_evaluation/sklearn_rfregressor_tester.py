@@ -6,10 +6,15 @@ from sklearn.metrics import roc_auc_score
 
 class RFRegressorTester(BaseTester):
 
-    RANGE_NB_TREES = [10, 50, 100]
-    RANGE_MAX_DEPTH = [6, 12]
-    RANGE_MAX_FEATURES = [.1, .5, 1.]
-    RANGE_MIN_SAMPLES_LEAF = [1, 10, 100]
+    # RANGE_NB_TREES = [50, 100]
+    # RANGE_MAX_DEPTH = [6, 12, 24]
+    # RANGE_MAX_FEATURES = [.1, .5]
+    # RANGE_MIN_SAMPLES_LEAF = [1, 10, 100]
+
+    RANGE_NB_TREES = [200, 500]
+    RANGE_MAX_DEPTH = [8, 12, 16, 24]
+    RANGE_MAX_FEATURES = [.1, .5]
+    RANGE_MIN_SAMPLES_LEAF = [10]
 
     def evaluate_model(self, features_model, x_train, y_train, x_validation, y_validation):
 

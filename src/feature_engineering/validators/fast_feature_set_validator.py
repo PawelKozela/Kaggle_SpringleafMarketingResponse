@@ -41,7 +41,7 @@ class FastFeatureSetValidator(BaseFeatureSetValidator):
                       'subsample': self._sub_sample,
                       'eval_metric': 'auc',
                       'silent': 1,
-                      'nthread': 4,
+                      'nthread': 2,
                       'seed': i_seed}
 
             eval_list = [(dtest, 'eval')]
