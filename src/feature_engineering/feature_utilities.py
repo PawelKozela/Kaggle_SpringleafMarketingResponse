@@ -44,6 +44,42 @@ def parse_date(value):
         return None
 
 
+def get_day_of_week(value):
+    date = parse_date(value)
+
+    if date is None:
+        return np.nan
+    else:
+        return date.weekday()
+
+
+def get_day_of_month(value):
+    date = parse_date(value)
+
+    if date is None:
+        return np.nan
+    else:
+        return date.day
+
+
+def get_day_of_year(value):
+    date = parse_date(value)
+
+    if date is None:
+        return np.nan
+    else:
+        return np.mod((date - datetime.datetime(2000, 1, 1)).days, 365)  # Approximate...
+
+
+def get_month(value):
+    date = parse_date(value)
+
+    if date is None:
+        return np.nan
+    else:
+        return date.month
+
+
 # TODO: Analyze for 0 ?
 def is_int_score(feature_data_values):
     if not 1 < feature_data_values.shape[0] < 110:
