@@ -44,6 +44,15 @@ def parse_date(value):
         return None
 
 
+def get_var_204_value(value):
+    date = parse_date(value)
+
+    if date is None:
+        return np.nan
+    else:
+        return (date - datetime.datetime(2014, 1, 28)).total_seconds()
+
+
 def get_day_of_week(value):
     date = parse_date(value)
 
@@ -125,8 +134,6 @@ def is_float_score(feature_data_values):
         default_values.extend(feature_data_values.index[feature_data_values.index > 900])
 
     return 'Float', 'Score', default_values, -1, None
-
-
 
 
 # ---------------------------------- 'Generic' # ----------------------------------
