@@ -1,5 +1,10 @@
 import pandas as pd
 import numpy as np
+import xgboost as xgb
+import pickle
+import os
+
+from datetime import datetime
 
 
 def describe_features(dataframe):
@@ -37,3 +42,23 @@ def remove_high_cardinality_features(data, threshold=1000):
 
     data = data.drop(data.columns[columns_to_remove], axis=1)
     return data
+
+
+MODEL_DIR = "F:\\Pawel\\Kaggle\\Springleaf Marketing Response\\Data\\Models"
+
+
+def save_model(model, results, params, feature_set, description=""):
+    timestamp = datetime.now()
+
+    dir_name = os.path.join(MODEL_DIR, timestamp.strftime('%Y%m%d_%H%M%S'))
+    if not os.path.exists(dir_name):
+        os.mkdir(dir_name)
+
+    model.save_model(os.path.join(dir_name, 'xgboost.model'))
+    metadata = {'timestamp': timestamp,
+                'results': results,
+                'params': params,
+                'feature_set': feature_set,
+                'description': description}
+
+    pickle.dump(metadata, open(os.path.join(dir_name, 'metadata.pickle'), 'wb'))
