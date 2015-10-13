@@ -28,8 +28,8 @@ class FastFeatureSetValidator(BaseFeatureSetValidator):
         x_validation = pd.read_hdf(os.path.join(self._data_dir, feature_set_name, 'train_validation_features.hf5'), 'data')
         y_validation = pd.read_hdf(os.path.join(self._data_dir, 'train_validation_y.hf5'), 'data')
 
-        dtrain = xgb.DMatrix(x_train, y_train['target'])
-        dtest = xgb.DMatrix(x_validation, y_validation['target'])
+        dtrain = xgb.DMatrix(x_train, y_train['target'], missing=-1)
+        dtest = xgb.DMatrix(x_validation, y_validation['target'], missing=-1)
 
         results = {}
         for i_seed in range(0, self.NB_SEEDS):
