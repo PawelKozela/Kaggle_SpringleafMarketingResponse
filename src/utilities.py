@@ -44,13 +44,10 @@ def remove_high_cardinality_features(data, threshold=1000):
     return data
 
 
-MODEL_DIR = "F:\\Pawel\\Kaggle\\Springleaf Marketing Response\\Data\\Models"
-
-
-def save_model(model, results, params, feature_set, description=""):
+def save_model(model, results, params, feature_set, description="", model_dir=""):
     timestamp = datetime.now()
 
-    dir_name = os.path.join(MODEL_DIR, timestamp.strftime('%Y%m%d_%H%M%S'))
+    dir_name = os.path.join(model_dir, timestamp.strftime('%Y%m%d_%H%M%S'))
     if not os.path.exists(dir_name):
         os.mkdir(dir_name)
 
