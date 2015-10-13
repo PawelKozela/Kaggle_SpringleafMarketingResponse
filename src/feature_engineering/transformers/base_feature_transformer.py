@@ -21,5 +21,8 @@ class BaseFeatureTransformer:
         if self.features_dir == target_dir:
             raise ValueError('Would override base features')
 
+        if not os.path.exists(target_dir):
+            os.mkdir(target_dir)
+
         self._train_features.to_hdf(os.path.join(target_dir, self._train_features_filename), 'data', complib='blosc', complevel=9)
         self._test_features.to_hdf(os.path.join(target_dir, self._test_features_filename), 'data', complib='blosc', complevel=9)
