@@ -43,7 +43,7 @@ class FullFeatureSetValidator(BaseFeatureSetValidator):
                       'min_child_weight': self._min_child_weight,
                       'eval_metric': 'auc',
                       'silent': 1,
-                      'nthread': 2,
+                      'nthread': 16,
                       'seed': i_seed}
 
             eval_list = [(dtest, 'eval')]
