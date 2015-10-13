@@ -5,17 +5,17 @@ from datetime import datetime
 
 class XGBoostTester(BaseTester):
 
-    RANGE_ETA = [.005, .01, .05, .1]
-    RANGE_MAX_DEPTH = [6, 12]
-    RANGE_COL_SAMPLE = [.05, .1, .25, 1]
+    RANGE_ETA = [.005, .01]
+    RANGE_MAX_DEPTH = [10, 16]
+    RANGE_COL_SAMPLE = [.1, .25]
     RANGE_SUB_SAMPLE = [.5, 1]
-    RANGE_MIN_CHILD_WEIGHT = [1, 10, 100]
+    RANGE_MIN_CHILD_WEIGHT = [5, 10, 20]
 
     NB_ROUNDS = 5 * 1000
 
     def evaluate_model(self, features_model, x_train, y_train, x_validation, y_validation):
-        dtrain = xgb.DMatrix(x_train, y_train['target'])
-        dtest = xgb.DMatrix(x_validation, y_validation['target'])
+        dtrain = xgb.DMatrix(x_train, y_train['target'], missing=-1)
+        dtest = xgb.DMatrix(x_validation, y_validation['target'], missing=-1)
 
         for i_eta in self.RANGE_ETA:
             for i_max_depth in self.RANGE_MAX_DEPTH:
@@ -31,7 +31,7 @@ class XGBoostTester(BaseTester):
                                       'min_child_weight': i_min_child_weight,
                                       'eval_metric': 'auc',
                                       'silent': 1,
-                                      'nthread': 4}
+                                      'nthread': 16}
 
                             eval_list = [(dtrain, 'train'), (dtest, 'eval')]
                             bst = xgb.train(params, dtrain, self.NB_ROUNDS, eval_list, evals_result=evals_result, verbose_eval=False, early_stopping_rounds=200)
