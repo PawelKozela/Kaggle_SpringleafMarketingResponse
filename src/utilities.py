@@ -44,7 +44,7 @@ def remove_high_cardinality_features(data, threshold=1000):
     return data
 
 
-def save_model(model, results, params, feature_set, description="", model_dir=""):
+def save_model(model, results, params, columns, feature_set, description="", model_dir=""):
     timestamp = datetime.now()
 
     dir_name = os.path.join(model_dir, timestamp.strftime('%Y%m%d_%H%M%S'))
@@ -56,6 +56,7 @@ def save_model(model, results, params, feature_set, description="", model_dir=""
                 'results': results,
                 'params': params,
                 'feature_set': feature_set,
+                'columns': columns,
                 'description': description}
 
     pickle.dump(metadata, open(os.path.join(dir_name, 'metadata.pickle'), 'wb'))
