@@ -5,6 +5,7 @@ import pandas as pd
 import xgboost as xgb
 
 from base_feature_set_validator import BaseFeatureSetValidator
+from ...utilities import save_model
 
 
 class FullFeatureSetValidator(BaseFeatureSetValidator):
@@ -50,6 +51,7 @@ class FullFeatureSetValidator(BaseFeatureSetValidator):
             bst = xgb.train(params, dtrain, self._nb_rounds, eval_list, evals_result=evals_result, verbose_eval=False, early_stopping_rounds=200)
             results[i_seed] = evals_result['eval'][-1]
 
+            save_model(bst, evals_result, params, x_train.columns.tolist(), feature_set_name, 'full_evaluation', os.path.join(self._data_dir, 'Models'))
             print 'Seed {} => {}'.format(i_seed, results[i_seed])
 
         return results
@@ -59,7 +61,7 @@ class FullFeatureSetValidator(BaseFeatureSetValidator):
 
         result = {
             'feature_set': feature_set_name,
-            'validator': 'FastFeatureValidator',
+            'validator': 'FullFeatureValidator',
             'timestmap': datetime.now(),
             'results': feature_set_results
         }
