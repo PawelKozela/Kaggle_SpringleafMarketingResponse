@@ -136,6 +136,13 @@ def is_float_score(feature_data_values):
     return 'Float', 'Score', default_values, -1, None
 
 
+def replace_with_avg(value, values_map):
+    if (values_map.index == value).any():
+        return values_map.loc[value, 'Ratio']
+
+    return -1  # Default value
+
+
 # ---------------------------------- 'Generic' # ----------------------------------
 
 def identify_feature_object(feature_data):
