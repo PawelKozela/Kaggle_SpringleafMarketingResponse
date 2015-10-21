@@ -4,7 +4,7 @@ import pandas as pd
 
 class BaseFeatureTransformer:
 
-    def __init__(self, features_dir, train_features_filename='train_features.hf5', test_features_filename='test_features.hf5', train_y_filename='train_train_y.hf5'):
+    def __init__(self, features_dir, train_features_filename='train_features.hf5', test_features_filename='test_features.hf5', train_y_filename='train_y.hf5'):
         self.features_dir = features_dir
         self._train_features_filename = train_features_filename
         self._test_features_filename = test_features_filename
