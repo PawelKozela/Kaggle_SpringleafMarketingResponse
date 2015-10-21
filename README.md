@@ -1,6 +1,6 @@
 # Kaggle_SpringleafMarketingResponse
 
-Code that ranked 123th in Kaggle Springleaf Marketing Response.
+Code that ranked 124th in Kaggle Springleaf Marketing Response.
 
 Transformers -> used to transform a feature set into another feature set (usually from raw)
 
